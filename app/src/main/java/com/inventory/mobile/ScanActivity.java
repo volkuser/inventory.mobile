@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -24,19 +23,17 @@ public class ScanActivity extends AppCompatActivity {
         scanButton = findViewById(R.id.scan_button);
         resultTextView = findViewById(R.id.result_text_view);
 
-        scanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (view.getId() == R.id.scan_button) {
-                    // Initialize the IntentIntegrator and start scanning
-                    IntentIntegrator integrator = new IntentIntegrator(ScanActivity.this);
-                    integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-                    integrator.setPrompt("Scan a QR code");
-                    integrator.setCameraId(0);
-                    integrator.setBeepEnabled(false);
-                    integrator.setBarcodeImageEnabled(false);
-                    integrator.initiateScan();
-                }
+        scanButton.setOnClickListener(view -> {
+            if (view.getId() == R.id.scan_button) {
+                // Initialize the IntentIntegrator and start scanning
+                IntentIntegrator integrator = new IntentIntegrator(ScanActivity.this);
+                integrator.setOrientationLocked(true)
+                        .setDesiredBarcodeFormats(IntentIntegrator.QR_CODE).setPrompt("Наведите камеру на QR-код единицы оборудования")
+                        .setCameraId(0)
+                        .setCaptureActivity(CaptureActivityPortrait.class)
+                        .setBeepEnabled(false)
+                        .setBarcodeImageEnabled(false)
+                        .initiateScan();
             }
         });
     }
@@ -46,7 +43,7 @@ public class ScanActivity extends AppCompatActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() == null) {
-                Toast.makeText(this, "Scan canceled", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Сканирование приостановлено", Toast.LENGTH_LONG).show();
             } else {
                 // Get the encrypted text from the QR code
                 String encryptedText = result.getContents();

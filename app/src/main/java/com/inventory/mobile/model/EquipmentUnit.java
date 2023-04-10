@@ -1,14 +1,7 @@
 package com.inventory.mobile.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.util.UUID;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class EquipmentUnit {
     private Long equipmentUnitId;
     private String inventoryNumber;
@@ -16,5 +9,25 @@ public class EquipmentUnit {
     private Location location;
     private boolean onState;
     private UUID guidCode;
+
+    public String getInventoryNumber() {
+        return inventoryNumber;
+    }
+
+    public Equipment getEquipment() {
+        return equipment;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public boolean isOnState() {
+        return onState;
+    }
+
+    public UUID getGuidCode() {
+        return guidCode;
+    }
 }
 
