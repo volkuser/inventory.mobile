@@ -3,6 +3,8 @@ package com.inventory.mobile;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.inventory.mobile.model.EquipmentUnit;
@@ -11,8 +13,6 @@ import java.io.IOException;
 import java.util.UUID;
 
 public class InfoActivity extends AppCompatActivity {
-
-    //private TextView encryptedTextView;
     private TextView invNumberTextView, modelTextView, typeTextView, manufacturerTextView, locationTextView, statusTextView;
 
     @Override
@@ -43,5 +43,8 @@ public class InfoActivity extends AppCompatActivity {
         manufacturerTextView.setText("Производитель: " + current.getEquipment().getManufacturer());
         locationTextView.setText("Местоположение: " + current.getLocation().getLocationNumber() + " (" + current.getLocation().getTrainingCenter().getCenterAddress() + ")");
         statusTextView.setText("Статус: " + (current.isOnState() ? "на месте" : "нет на месте"));
+
+        ImageView backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(view -> onBackPressed());
     }
 }

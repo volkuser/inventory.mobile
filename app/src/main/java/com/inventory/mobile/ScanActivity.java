@@ -5,15 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
 import android.widget.Toast;
 
 public class ScanActivity extends AppCompatActivity {
     private Button scanButton;
-    private TextView resultTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +20,6 @@ public class ScanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scan);
 
         scanButton = findViewById(R.id.scan_button);
-        resultTextView = findViewById(R.id.result_text_view);
 
         scanButton.setOnClickListener(view -> {
             if (view.getId() == R.id.scan_button) {
